@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: whats-for-dinner
+
+server:
+  port: ${PORT:8181}

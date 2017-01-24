@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+
+    <title>What's in the menu? - interconnect 2017</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>What's in the Menu? - InterConnect 2017</h1>
+    <h3>InterConnect 2017 lab on IBM Containes Service and IBM Bluemix Toolchain Service</h3>
+
+    <p>Drinks</p>
+    <ul>
+      <li th:each="opts1 : ${drinksOptions}">
+        <p th:text="${{opts1}}" />
+      </li>
+    </ul>
+
+    <p>Food</p>
+    <ul>
+      <li th:each="opts2 : ${foodOptions}">
+        <p th:text="${{opts2}}" />
+      </li>
+    </ul>
+
+</body>
+</html>
