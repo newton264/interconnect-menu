@@ -1,6 +1,10 @@
 spring:
   application:
-    name: whats-for-dinner
+    name: interconnect17-menu
+
+location:
+  drinks: ${DRINKS_URL:localhost}
+  food: ${FOOD_URL:localhost}
 
 server:
   port: ${PORT:8181}

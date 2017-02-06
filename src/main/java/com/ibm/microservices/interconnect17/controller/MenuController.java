@@ -12,6 +12,9 @@ import org.springframework.boot.json.BasicJsonParser;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
+
+
 
 @Controller
 public class MenuController {
@@ -40,13 +43,19 @@ public class MenuController {
     return "index";
   }
 
+  @Value("${location.drinks}")
+  private String drinks_location;
+
+  @Value("${location.food}")
+  private String food_location;
+
   private String getDrinksMenu() {
-    String drinks = this.restTemplate.getForObject("http://localhost:8081/drinks", String.class);
+    String drinks = this.restTemplate.getForObject("http://" + drinks_location + ":8081/drinks", String.class);
     System.out.println(drinks);
     return drinks;
   }
   private String getFoodMenu() {
-    String food = this.restTemplate.getForObject("http://localhost:8082/food", String.class);
+    String food = this.restTemplate.getForObject("http://" + food_location + ":8082/food", String.class);
     System.out.println(food);
     return food;
   }
