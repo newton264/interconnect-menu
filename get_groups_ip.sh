@@ -21,11 +21,11 @@ FOOD_ID=`cf ic group list | grep food | awk '{print $1}' | head -n 1`
 DRINKS_ID=`cf ic group list | grep drinks | awk '{print $1}' | head -n 1`
 
 #echo "Getting IP address for food container group $FOOD_ID"
-FOOD_LOAD_BALANCER_IP=`cf ic group inspect $FOOD_ID | jq -r .Loadbalancer.private_ip_address`
+FOOD_LOAD_BALANCER_IP=`cf ic group inspect $FOOD_ID | grep private_ip_address | sed 's/.*: "\(.*\)"$/\1/g'`
 #echo "Loadbalancer IP: ${FOOD_LOAD_BALANCER_IP}"
 #echo
 #echo "Getting IP address for drinks container group $DRINKS_ID"
-DRINKS_LOAD_BALANCER_IP=`cf ic group inspect $DRINKS_ID | jq -r .Loadbalancer.private_ip_address`
+DRINKS_LOAD_BALANCER_IP=`cf ic group inspect $DRINKS_ID | grep private_ip_address | sed 's/.*: "\(.*\)"$/\1/g'`
 #echo "Loadbalancer IP: ${DRINKS_LOAD_BALANCER_IP}"
 #echo
 echo "--env DRINKS_URL=${DRINKS_LOAD_BALANCER_IP} --env FOOD_URL=${FOOD_LOAD_BALANCER_IP}"
