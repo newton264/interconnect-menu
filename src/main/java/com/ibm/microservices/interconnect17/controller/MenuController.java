@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.lang.Object;
+import java.lang.String;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,8 @@ public class MenuController {
     return "index";
   }
 
+  private CharSequence cloud_domain="mybluemix.net";
+
   @Value("${location.drinks}")
   private String drinks_location;
 
@@ -50,14 +53,24 @@ public class MenuController {
   private String food_location;
 
   private String getDrinksMenu() {
-    String drinks = this.restTemplate.getForObject("http://" + drinks_location + ":8081/drinks", String.class);
+    String drinks;
+    if (drinks_location.contains(cloud_domain))
+      drinks = this.restTemplate.getForObject("http://" + drinks_location + "/drinks", String.class);
+    else
+      drinks = this.restTemplate.getForObject("http://" + drinks_location + ":8081/drinks", String.class);
     System.out.println(drinks);
     return drinks;
   }
   private String getFoodMenu() {
-    String food = this.restTemplate.getForObject("http://" + food_location + ":8082/food", String.class);
+    String food;
+    if (food_location.contains(cloud_domain))
+      food = this.restTemplate.getForObject("http://" + food_location + "/food", String.class);
+    else
+      food = this.restTemplate.getForObject("http://" + food_location + ":8082/food", String.class);
     System.out.println(food);
     return food;
   }
+
+
 
 }
