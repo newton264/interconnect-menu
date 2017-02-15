@@ -54,31 +54,19 @@ public class MenuController {
 
   private String getDrinksMenu() {
     String drinks;
-    if (drinks_location.contains(cloud_domain)){
-      System.out.println("Cloud deployment since DRINKS_URL contains mybluemix.net");
-      System.out.println(drinks_location);
+    if (drinks_location.contains(cloud_domain))
       drinks = this.restTemplate.getForObject("http://" + drinks_location + "/drinks", String.class);
-    }
-    else {
-      System.out.println("Local deployment since DRINKS_URL does not contain mybluemix.net");
-      System.out.println(drinks_location);
+    else
       drinks = this.restTemplate.getForObject("http://" + drinks_location + ":8081/drinks", String.class);
-    }
     System.out.println(drinks);
     return drinks;
   }
   private String getFoodMenu() {
     String food;
-    if (food_location.contains(cloud_domain)){
-      System.out.println("Cloud deployment since FOOD_URL contains mybluemix.net");
-      System.out.println(food_location);
+    if (food_location.contains(cloud_domain))
       food = this.restTemplate.getForObject("http://" + food_location + "/food", String.class);
-    }
-    else {
-      System.out.println("Local deployment since FOOD_URL does not contain mybluemix.net");
-      System.out.println(food_location);
+    else
       food = this.restTemplate.getForObject("http://" + food_location + ":8082/food", String.class);
-    }
     System.out.println(food);
     return food;
   }
